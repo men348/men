@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>查看信息</title>
+</head>
+<body>
+
+<button type="button" onclick="getPerson()"> 查看信息</button>
+
+<input type="text" id="name">
+<input type="text" id="age">
+<input type="text" id="birthday">
+
+<form action="/rest/write">
+    <button type="submit">提交</button>
+</form>
+
+</body>
+</html>
+
+<script type="application/javascript">
+    function getPerson() {
+        var xmlHttpRequest = new XMLHttpRequest();
+        var url = 'http://localhost:8080/rest/person'
+        xmlHttpRequest.open("GET", url, true);
+        var person = xmlHttpRequest.result;
+        console.log(xmlHttpRequest.open("GET", url, true));
+        if (person) {
+            var name = document.getElementById('name');
+            name.value = person.name;
+            var age = document.getElementById('age');
+            age.value = person.age;
+            var birthday = document.getElementById('birthday');
+            birthday.value=person.birthday;
+        }
+    }
+
+</script>
+

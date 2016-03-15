@@ -1,0 +1,98 @@
+<!DOCTYPE html >
+<html>
+<head></head>
+<style type="text/css" media="screen">
+    @media print{
+        .print {display:block;}
+        .notPrint {display:none;}
+    }
+</style>
+<script language="javascript">
+    function preview()
+    {
+        bdhtml=window.document.body.innerHTML;
+        sprnstr="<!--startprint-->";
+        eprnstr="<!--endprint-->";
+        prnhtml=bdhtml.substr(bdhtml.indexOf(sprnstr)+17);
+        prnhtml=prnhtml.substring(0,prnhtml.indexOf(eprnstr));
+        window.document.body.innerHTML=prnhtml;
+        window.print();
+    }
+</script>
+<body>
+<form id="WebForm1" method="post" >
+    <div style="text-align: center">This part above won't be printed</div>
+    <!--startprint-->
+    <div align="center">
+        <table>
+            <tr><td>print print print print</td></tr>
+        </table>
+    </div>
+
+    <!--endprint-->
+    <div style="text-align: center">This part bellow won't be printed</div>
+    <div align="center">
+        <input type="button" name="print" value="preview and print" onclick="preview()">
+    </div>
+    <style> @media Print { .Noprn { DISPLAY: none }}
+    </style>
+    <p class="Noprn" style="text-align: center">not print</p>
+    <table id="datagrid" align="center">
+        <tr>
+            <td>print</td>
+        </tr>
+    </table>
+    <input align="center" class="Noprn" type="button" onclick="window.print()" value="print">
+</form>
+</body>
+</html>
+
+<script language="javascript">
+    function preview()
+    {
+        bdhtml=window.document.body.innerHTML;
+        sprnstr="<!--startprint-->";
+        eprnstr="<!--endprint-->";
+        prnhtml=bdhtml.substr(bdhtml.indexOf(sprnstr)+17);
+        prnhtml=prnhtml.substring(0,prnhtml.indexOf(eprnstr));
+        window.document.body.innerHTML=prnhtml;
+        window.print();
+    }
+</script>
+
+<script>
+    var HKEY_Root,HKEY_Path,HKEY_Key;
+    HKEY_Root="HKEY_CURRENT_USER";
+    HKEY_Path="\\Software\\Microsoft\\Internet Explorer\\PageSetup\\";
+    //设置网页打印的页眉页脚为空
+    function PageSetup_Null()
+    {
+        try
+        {
+            var Wsh=new ActiveXObject("WScript.Shell");
+            HKEY_Key="header";
+            Wsh.RegWrite(HKEY_Root+HKEY_Path+HKEY_Key,"");
+            HKEY_Key="footer";
+            Wsh.RegWrite(HKEY_Root+HKEY_Path+HKEY_Key,"");
+        }
+        catch(e)
+        {}
+
+    }
+    //设置网页打印的页眉页脚为默认值
+    function PageSetup_Default()
+    {
+        try
+        {
+            var Wsh=new ActiveXObject("WScript.Shell");
+            HKEY_Key="header";
+            Wsh.RegWrite(HKEY_Root+HKEY_Path+HKEY_Key,"&w&b页码,&p/&P");
+            HKEY_Key="footer";
+            Wsh.RegWrite(HKEY_Root+HKEY_Path+HKEY_Key,"&u&b&d");
+        }
+        catch(e)
+        {}
+
+    }
+    PageSetup_Default();
+</script>
